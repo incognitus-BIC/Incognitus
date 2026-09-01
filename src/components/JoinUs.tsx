@@ -85,7 +85,9 @@ export default function JoinUs() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="#"
+            href="https://discord.gg/5avTYe8VX"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[var(--color-primary)] font-semibold rounded-xl text-base transition-all duration-300 hover:scale-105 hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)]"
             style={{ fontFamily: "var(--font-heading)" }}
           >
@@ -104,7 +106,9 @@ export default function JoinUs() {
             </svg>
           </a>
           <a
-            href="#"
+            href="https://discord.gg/5avTYe8VX"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-white/30 text-white font-semibold rounded-xl text-base transition-all duration-300 hover:border-white/60 hover:bg-white/10"
             style={{ fontFamily: "var(--font-heading)" }}
           >
