@@ -21,7 +21,10 @@ export default function About() {
     <section
       id="about"
       className="relative py-[var(--section-padding-y)] px-[var(--section-padding-x)]"
-      style={{ background: "var(--color-surface)" }}
+      style={{
+        background: "rgba(248, 247, 252, 0.72)",
+        backdropFilter: "blur(3px)",
+      }}
     >
       {/* Decorative accent */}
       <div

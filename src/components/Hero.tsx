@@ -6,8 +6,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: "var(--color-background)" }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-transparent"
     >
       {/* Background glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">

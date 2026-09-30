@@ -74,8 +74,7 @@ export default function WhatWeDo() {
   return (
     <section
       id="focus"
-      className="relative py-[var(--section-padding-y)] px-[var(--section-padding-x)]"
-      style={{ background: "var(--color-background)" }}
+      className="relative py-[var(--section-padding-y)] px-[var(--section-padding-x)] bg-transparent"
     >
       <div ref={ref} className="max-w-[var(--container-max)] mx-auto">
         <div className="text-center mb-14">

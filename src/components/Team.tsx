@@ -30,7 +30,10 @@ export default function Team() {
     <section
       id="team"
       className="relative py-[var(--section-padding-y)] px-[var(--section-padding-x)]"
-      style={{ background: "var(--color-surface)" }}
+      style={{
+        background: "rgba(248, 247, 252, 0.72)",
+        backdropFilter: "blur(3px)",
+      }}
     >
       <div ref={ref} className="max-w-[var(--container-max)] mx-auto">
         <div className="text-center mb-14">

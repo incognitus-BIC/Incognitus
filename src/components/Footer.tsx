@@ -88,8 +88,10 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
           <p>
-            Powered by{" "}
-            <span className="text-white/80 font-medium">BIC DevCorps</span>
+            Crafted by{" "}
+            <span className="text-white/80 font-medium">
+              Hackers &amp; Builders at inCognitus
+            </span>
           </p>
           <p>
             © {new Date().getFullYear()} inCognitus, Biratnagar International
