@@ -1,0 +1,27 @@
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import WhatWeDo from "@/components/WhatWeDo";
+import Team from "@/components/Team";
+import Events from "@/components/Events";
+import JoinUs from "@/components/JoinUs";
+import Footer from "@/components/Footer";
+import MatrixRain from "@/components/MatrixRain";
+
+export default function Home() {
+  return (
+    <>
+      <MatrixRain />
+      <Navbar />
+      <main className="relative z-10">
+        <Hero />
+        <About />
+        <WhatWeDo />
+        <Team />
+        <Events />
+        <JoinUs />
+      </main>
+      <Footer />
+    </>
+  );
+}
