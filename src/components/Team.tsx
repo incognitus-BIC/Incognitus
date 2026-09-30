@@ -1,21 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const teamMembers = [
-  { name: "Member Name", role: "President", initials: "MN" },
-  { name: "Member Name", role: "Vice President", initials: "MN" },
-  { name: "Member Name", role: "Technical Lead", initials: "MN" },
-  { name: "Member Name", role: "Events Coordinator", initials: "MN" },
-  { name: "Member Name", role: "CTF Captain", initials: "MN" },
-  { name: "Member Name", role: "Community Manager", initials: "MN" },
-];
+import { getTeamMembers, DEFAULT_TEAM_MEMBERS } from "@/lib/team";
+import type { TeamMember } from "@/types/database";
 
 export default function Team() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [members, setMembers] = useState<TeamMember[]>(DEFAULT_TEAM_MEMBERS);
 
   useEffect(() => {
+    let isMounted = true;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setVisible(true);
@@ -23,7 +18,18 @@ export default function Team() {
       { threshold: 0.1 }
     );
     if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+
+    // Fetch dynamic team members from Supabase
+    getTeamMembers().then((data) => {
+      if (isMounted && data && data.length > 0) {
+        setMembers(data);
+      }
+    });
+
+    return () => {
+      isMounted = false;
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -49,9 +55,9 @@ export default function Team() {
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-          {teamMembers.map((member, i) => (
+          {members.map((member, i) => (
             <div
-              key={`${member.role}-${i}`}
+              key={member.id || `${member.role}-${i}`}
               className={`card-hover group text-center rounded-2xl p-6 border transition-all duration-700 ${
                 visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
               }`}
@@ -61,25 +67,35 @@ export default function Team() {
                 transitionDelay: `${i * 0.08}s`,
               }}
             >
-              {/* Avatar placeholder */}
+              {/* Avatar placeholder or image */}
               <div
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full mx-auto mb-4 flex items-center justify-center transition-all duration-500 group-hover:scale-110"
+                className="w-16 h-16 sm:w-20 sm:h-20 rounded-full mx-auto mb-4 overflow-hidden flex items-center justify-center transition-all duration-500 group-hover:scale-110 shadow-sm"
                 style={{
                   background:
                     "linear-gradient(135deg, var(--color-secondary-light), var(--color-primary))",
                 }}
               >
-                <span
-                  className="text-lg sm:text-xl font-bold text-white"
-                  style={{ fontFamily: "var(--font-heading)" }}
-                >
-                  {member.initials}
-                </span>
+                {member.image_url ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={member.image_url}
+                    alt={member.name}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span
+                    className="text-lg sm:text-xl font-bold text-white select-none"
+                    style={{ fontFamily: "var(--font-heading)" }}
+                  >
+                    {member.initials || member.name.slice(0, 2).toUpperCase()}
+                  </span>
+                )}
               </div>
 
               {/* Name */}
               <h3
-                className="text-sm font-semibold mb-1"
+                className="text-sm font-semibold mb-1 truncate px-1"
+                title={member.name}
                 style={{
                   fontFamily: "var(--font-heading)",
                   color: "var(--color-dark)",
@@ -90,7 +106,8 @@ export default function Team() {
 
               {/* Role */}
               <span
-                className="text-xs"
+                className="text-xs block truncate px-1"
+                title={member.role}
                 style={{
                   color: "var(--color-secondary)",
                   fontFamily: "var(--font-mono)",
