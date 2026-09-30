@@ -126,6 +126,7 @@ const jsonLd = {
       email: "incognitus@bicnepal.edu.np",
       sameAs: [
         "https://discord.gg/5avTYe8VX",
+        "https://www.instagram.com/bic_incognitus/",
       ],
     },
     {
